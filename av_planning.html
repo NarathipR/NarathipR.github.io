@@ -51,83 +51,44 @@
 				<!-- Content -->
 				<section>
 					<header class="main">
-						<h2>Robot Manipulation</h2>
+						<h2>Autonomous Vehicle: Motion Planning</h2>
 					</header>
 
 					<img src="images/robot_manipulation/ur3.jpg" width="400" alt="" />
 					<h2>Description</h2>
-					<p>These tasks are components of ECE470 Introduction to Robotics at the University of Illinois.
+					<p>These tasks are components of Motion Planning for Self-Driving Cars by University of Toronto.
 					</p>
 
 					<hr class="major" />
 					<h2>Overview</h2>
 					<ol>
-						<li>Forward Kinematics & Inverse Kinematics</li>
-						<li>Hand-Eye Coordination</li>
+						<li>Occupancy Grid Map Generation</li>
+						<li>Planning</li>
 					</ol>
 
 					<hr class="major" />
-					<h2>1) Forward Kinematics & Inverse Kinematics </h2>
+					<h2>Occupancy Grid Map Generation</h2>
 					<dl>
 						<h3>Implementation</h3>
 						<dd>
-							<p>The system will receive joint angles and return the corresponding end-effector position (forward kinematics), as well as accept a desired position and use the robot's geometry to solve for the required joint angles (inverse kinematics).</p>
-							<!-- <dl>
-								<dt>Gradient Threshold</dt>
-								<dd>
-									<p>In the gradient binary image, we compute the gradient in both the x and y
-										directions. We combine these gradients using a linear combination. Edges are
-										extracted if the gradient falls within the range defined by the minimum
-										threshold (50) and maximum threshold (150).
-									</p>
-
-								</dd>
-								<dt>Color Threshold</dt>
-								<dd>
-									<p>We utilize the HSL color space for this task. In scenarios other than snow, we
-										binarize images using the Saturation (S) channel. Road lines, being white and
-										yellow, typically exhibit higher saturation compared to road surfaces. This
-										approach is more robust in various lighting conditions. However, in snowy
-										conditions, we switch to the L color space for binarization, leveraging the
-										significant contrast between the road surface and snow.</p>
-								</dd>
-								<dt>Perspective Transform</dt>
-								<dd>
-									<p>The perspective transform involves selecting coordinates representing the ends of
-										the left and right lanes as the source points. The destination points correspond
-										to the corners of the original images ([0, 0], [w, 0], [0, h], [w, h]). To
-										ensure robust lane detection across different car orientations, we account for
-										the window frame when the car is turning, guaranteeing accurate detection of
-										left and right lanes.</p>
-								</dd>
-								<dt>Lane Fitting</dt>
-								<dd>
-									<p>The data obtained from the perspective transform is utilized to fit a
-										second-order polynomial line.
-									</p>
-								</dd>
-							</dl> -->
+							<p>Use lidar scanner data from a moving vehicle to create an occupancy grid map. The process involves implementing the inverse scanner measurement model to extract occupancy probabilities and iteratively updating a belief map through log-odds calculations. This approach constructs a probabilistic occupancy grid that converges to the true map as more data is gathered.</p>
+							
 						</dd>
-						<h3>Demo</h3>
+						<h3>Result</h3>
 						<video controls autoplay muted  loop width="640" height="360">
-							<source src="images\robot_manipulation\demo1.MOV" type="video/quicktime">
-							<source src="images\robot_manipulation\demo1.MOV" type="video/mp4">
+							<source src="images\autonomous_vehicle\occupancy_gridmap.mp4" type="video/mp4">
 						</video>
-						<!-- <h3>Result</h3>
-						<video controls autoplay loop width="640" height="360">
-							<source src="images\vehicle_control\mp1_0830_web.mp4" type="video/mp4">
-						</video> -->
+						
 					</dl>
 
 					<hr class="major" />
-					<h2>2) Hand-Eye Coordination</h2>
+					<h2>Planning</h2>
 					<dl>
 
 						<h3>Implementation</h3>
 						<dd>
 							<p>
-							The task involves implementing hand-eye coordination for a robotic system using an overhead camera to view the workspace. The process consists of the following steps:
-							</p>
+There are 4 components including Path genereation, Path collision checking, Velocity profile generetion and Behavioural planning. With these pipelines, the system was simulated by CARLA at the case of intersection.</p>
 							<ul>
 								<li>Camera Calibration: Calibrate the top-mounted camera to the robot arm's coordinate system, establishing a precise spatial relationship between the camera's view and the robot's workspace.</li>
 								<li>Image Processing: Implement image filtering techniques to detect and locate colored boxes within the camera's field of view.</li>
@@ -152,12 +113,6 @@
 						<li>Universal Robots UR 3</li>
 					</ul>
 
-					<hr class="major" />
-					<h2>Contributors</h2>
-					<ul>
-						<li>Narathip Rodwarna</li>
-						<li>Vagish Sivaramakrishnan</li>
-					</ul>
 				</section>
 			</div>
 		</div>
