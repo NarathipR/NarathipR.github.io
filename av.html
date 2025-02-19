@@ -62,17 +62,31 @@
 					<hr class="major" />
 					<h2>Overview</h2>
 					<ol>
+						<li>Visual Odometry</li>
 						<li>Longtitudinal and Lateral Control</li>
 						<li>Occupancy Grid Map Generation</li>
 						<li>Planning</li>
 					</ol>
+					<hr class="major" />
+					<h2>Visual Odometry</h2>
+					<dl>
+						<h3>Implementation</h3>
+						<dd>
+							<p> First, keypoints are detected, and ORB descriptors are extracted from each frame. Corresponding features between consecutive frames are matched, and outliers are removed using RANSAC. The essential matrix is then computed from the inlier matches and decomposed into rotation and translation to recover the camera's relative pose.</p>
+						<div class="center-image"><img src="images/autonomous_vehicle/match_points_2.png" width="800" alt="" /></div>
+						</dd>
+						<h3>Result</h3>
 
+						<div class="center-image"><img src="images/autonomous_vehicle/trajectory.png" width="300" alt="" /></div>
+
+						
+					</dl>
 					<hr class="major" />
 					<h2>Longtitudinal and Lateral Control</h2>
 					<dl>
 						<h3>Implementation</h3>
 						<dd>
-							<p>In this implementation, I implemented PID controller for Longtitudinal control and Stanley control for Lateral control</p>
+							<p>PID controller is utilized for longitudinal control and a Stanley controller is employed for lateral control.</p>
 							
 						</dd>
 						<h3>Result</h3>
@@ -123,6 +137,8 @@ There are 4 components including Path generation, Path collision checking, Veloc
 					<hr class="major" />
 					<h2>Related Skills and Tools</h2>
 					<ul>
+						<li>Visual Odometry</li>
+						<li>Essential Matrix</li>
 						<li>PID</li>
 						<li>Stanley Control</li>
 						<li>Motion Planning</li>
