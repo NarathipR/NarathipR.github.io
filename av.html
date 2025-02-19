@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Narathip Rodwarna: Projects</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<style>
+		p {
+			text-align: justify;
+
+		}
+
+		.center-image {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.box {
+
+			background-color: #F5F6F7;
+		}
+	</style>
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+
+				<!-- Header -->
+				<header id="header">
+					<!-- <a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a> -->
+					<ul class="icons">
+						<li><a href="https://www.linkedin.com/in/narathip-rodwarna/"
+								class="icon brands fa-linkedin"><span class="label">Twitter</span></a></li>
+					</ul>
+				</header>
+
+				<!-- Content -->
+				<section>
+					<header class="main">
+						<h2>Autonomous Vehicle</h2>
+					</header>
+
+					<img src="images/autonomous_vehicle/gem_banner.JPG" width="400" alt="" />
+					<h2>Description</h2>
+					<p>These tasks are components of Self-Driving Cars Specialization by University of Toronto.
+					</p>
+
+					<hr class="major" />
+					<h2>Overview</h2>
+					<ol>
+						<li>Longtitudinal and Lateral Control</li>
+						<li>Occupancy Grid Map Generation</li>
+						<li>Planning</li>
+					</ol>
+
+					<hr class="major" />
+					<h2>Longtitudinal and Lateral Control</h2>
+					<dl>
+						<h3>Implementation</h3>
+						<dd>
+							<p>In this implementation, I implemented PID controller for Longtitudinal control and Stanley control for Lateral control</p>
+							
+						</dd>
+						<h3>Result</h3>
+						<video controls autoplay muted  loop width="640" height="360">
+							<source src="images\autonomous_vehicle\project_control.mp4" type="video/mp4">
+						</video>
+						
+					</dl>
+					<hr class="major" />
+					<h2>Occupancy Grid Map Generation</h2>
+					<dl>
+						<h3>Implementation</h3>
+						<dd>
+							<p>Use lidar scanner data from a moving vehicle to create an occupancy grid map. The process involves implementing the inverse scanner measurement model to extract occupancy probabilities and iteratively updating a belief map through log-odds calculations. This approach constructs a probabilistic occupancy grid that converges to the true map as more data is gathered.</p>
+							
+						</dd>
+						<h3>Result</h3>
+						<video controls autoplay muted  loop width="640" height="360">
+							<source src="images\autonomous_vehicle\occupancy_gridmap.mp4" type="video/mp4">
+						</video>
+						
+					</dl>
+
+					<hr class="major" />
+					<h2>Planning</h2>
+					<dl>
+
+						<h3>Implementation</h3>
+						<dd>
+							<p>
+There are 4 components including Path generation, Path collision checking, Velocity profile generation and Behavioural planning. With this pipeline, the system was simulated by CARLA.</p>
+						</dd>
+
+						<h3>Demo</h3>
+						<p>Example 1: Vehicle Avoidance</p>
+													
+						<video controls autoplay muted onloadstart="this.playbackRate = 1.5;" loop width="640" height="360">
+							<source src="images\autonomous_vehicle\project_planning_avoidance.mp4" type="video/mp4">
+							<!-- <source src="images\autonomous_vehicle\project_planning_stopsign" type="video/mp4"> -->
+						</video>
+						<p>   </p>
+						<p>Example 2: Stop Sign</p>
+						<video controls autoplay muted onloadstart="this.playbackRate = 2.5;" loop width="640" height="360">
+							<source src="images\autonomous_vehicle\project_planning_stopsign.mp4" type="video/mp4">
+						</video>
+					</dl>
+
+					<hr class="major" />
+					<h2>Related Skills and Tools</h2>
+					<ul>
+						<li>PID</li>
+						<li>Stanley Control</li>
+						<li>Motion Planning</li>
+						<li>Bayesian Probability Update</li>
+						<li>CARLA Simulation</li>
+					</ul>
+
+				</section>
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+				<!-- Menu -->
+				<nav id="menu">
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+						<li><a href="index.html">Homepage</a></li>
+						<li><a href="index.html#projects">Projects and Research Experience</a></li>
+						<li><a href="index.html#experience">Professional Experience</a></li>
+						<li><a href="index.html#area of interest">Area of Interest</a></li>
+						<li><a href="index.html#education">Education</a></li>
+					</ul>
+				</nav>
+
+				<!-- Section -->
+				<section>
+					<header class="major">
+						<h2>Contact</h2>
+					</header>
+					<ul class="contact">
+						<li class="icon brands fa-linkedin"><a
+								href="https://www.linkedin.com/in/narathip-rodwarna/">Narathip Rodwarna</a></li>
+						<li class="icon solid fa-envelope"><a href="mailto:nrodwarna@gmail.com">nrodwarna@gmail.com</a>
+						</li>
+						<li class="icon solid fa-phone">(+1) 917-756-4639</li>
+						<li class="icon solid fa-home">Champaign, IL 61820</li>
+
+					</ul>
+				</section>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a
+							href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5
+							UP</a>.</p>
+				</footer>
+
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
