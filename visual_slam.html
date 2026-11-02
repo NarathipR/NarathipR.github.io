@@ -44,119 +44,72 @@
 					<!-- <a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a> -->
 					<ul class="icons">
 						<li><a href="https://www.linkedin.com/in/narathip-rodwarna/"
-								class="icon brands fa-linkedin"><span class="label">Twitter</span></a></li>
+								class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
 					</ul>
 				</header>
 
 				<!-- Content -->
 				<section>
 					<header class="main">
-						<h2>Visual SLAM Benchmarking and Fusion</h2>
+						<h2>Visual SLAM Benchmarking &amp; Failure Analysis</h2>
 					</header>
 
-					<img src="images/visual_slam/ur3.jpg" width="400" alt="" />
+					<img src="images/visual_slam/banner.png" width="600" alt="Visual SLAM trajectory comparison" />
 					<h2>Description</h2>
-					<p>These tasks are components of ECE470 Introduction to Robotics at the University of Illinois.
-					</p>
+					<p>A UIUC graduate project (ENG 573) sponsored by GE Aerospace, aimed at improving UAV navigation in GPS-denied environments. We compared three monocular Visual SLAM algorithms across public datasets and investigated whether tracking failures could be predicted in advance. My role was benchmarking the algorithms and building the failure-analysis pipeline.</p>
 
 					<hr class="major" />
 					<h2>Overview</h2>
 					<ol>
-						<li>Forward Kinematics & Inverse Kinematics</li>
-						<li>Hand-Eye Coordination</li>
+						<li>Visual SLAM Benchmarking</li>
+						<li>Tracking-Failure Analysis</li>
 					</ol>
 
 					<hr class="major" />
-					<h2>1) Forward Kinematics & Inverse Kinematics </h2>
+					<h2>1) Visual SLAM Benchmarking</h2>
 					<dl>
 						<h3>Implementation</h3>
 						<dd>
-							<p>The system will receive joint angles and return the corresponding end-effector position (forward kinematics), as well as accept a desired position and use the robot's geometry to solve for the required joint angles (inverse kinematics).</p>
-							<!-- <dl>
-								<dt>Gradient Threshold</dt>
-								<dd>
-									<p>In the gradient binary image, we compute the gradient in both the x and y
-										directions. We combine these gradients using a linear combination. Edges are
-										extracted if the gradient falls within the range defined by the minimum
-										threshold (50) and maximum threshold (150).
-									</p>
-
-								</dd>
-								<dt>Color Threshold</dt>
-								<dd>
-									<p>We utilize the HSL color space for this task. In scenarios other than snow, we
-										binarize images using the Saturation (S) channel. Road lines, being white and
-										yellow, typically exhibit higher saturation compared to road surfaces. This
-										approach is more robust in various lighting conditions. However, in snowy
-										conditions, we switch to the L color space for binarization, leveraging the
-										significant contrast between the road surface and snow.</p>
-								</dd>
-								<dt>Perspective Transform</dt>
-								<dd>
-									<p>The perspective transform involves selecting coordinates representing the ends of
-										the left and right lanes as the source points. The destination points correspond
-										to the corners of the original images ([0, 0], [w, 0], [0, h], [w, h]). To
-										ensure robust lane detection across different car orientations, we account for
-										the window frame when the car is turning, guaranteeing accurate detection of
-										left and right lanes.</p>
-								</dd>
-								<dt>Lane Fitting</dt>
-								<dd>
-									<p>The data obtained from the perspective transform is utilized to fit a
-										second-order polynomial line.
-									</p>
-								</dd>
-							</dl> -->
+							<p>ORB-SLAM3 (feature-based), OpenVSLAM (feature-based) and LSD-SLAM (direct, intensity-based) were run on the EuRoC MAV dataset and the Kagaru airborne stereo dataset. Output trajectories were aligned to ground truth and evaluated with Absolute Pose Error (APE) and Relative Pose Error (RPE).</p>
 						</dd>
-						<h3>Demo</h3>
-						<video controls autoplay muted  loop width="640" height="360">
-							<source src="images\robot_manipulation\demo1.MOV" type="video/quicktime">
-							<source src="images\robot_manipulation\demo1.MOV" type="video/mp4">
-						</video>
-						<!-- <h3>Result</h3>
-						<video controls autoplay loop width="640" height="360">
-							<source src="images\vehicle_control\mp1_0830_web.mp4" type="video/mp4">
-						</video> -->
+						<h3>Result</h3>
+						<dd>
+							<p>OpenVSLAM was the most accurate and robust overall. On Kagaru, the longest trajectory, the algorithms recovered from tracking loss very differently: OpenVSLAM merged disconnected segments back into one global map (though it took longer to recover), ORB-SLAM3 created several submaps but kept only the first, and LSD-SLAM could not relocalize in areas it had not seen before.</p>
+						</dd>
 					</dl>
 
 					<hr class="major" />
-					<h2>2) Hand-Eye Coordination</h2>
+					<h2>2) Tracking-Failure Analysis</h2>
 					<dl>
-
 						<h3>Implementation</h3>
 						<dd>
-							<p>
-							The task involves implementing hand-eye coordination for a robotic system using an overhead camera to view the workspace. The process consists of the following steps:
-							</p>
-							<ul>
-								<li>Camera Calibration: Calibrate the top-mounted camera to the robot arm's coordinate system, establishing a precise spatial relationship between the camera's view and the robot's workspace.</li>
-								<li>Image Processing: Implement image filtering techniques to detect and locate colored boxes within the camera's field of view.</li>
-								<li>Hand-Eye Coordination: Utilize the calibrated system and image processing results to enable the robot arm to accurately pick and place the detected boxes within the workspace.</li>
-							</ul>
+							<p>To see whether failures could be predicted, I extracted image features (Laplacian variance, entropy, brightness, contrast, disparity) and motion parameters (linear and angular velocities and their changes) from the EuRoC V203 sequence. The pipeline normalized and resampled the data, tested stationarity with the Augmented Dickey-Fuller test, selected features with Granger causality, chose the lag order with AIC, and fit Vector Autoregression (VAR) and univariate AutoReg models. Residuals were then summed over 1-second windows to look for early-warning signals.</p>
 						</dd>
-
-						<h3>Demo</h3>
-						<video controls autoplay muted  loop width="640" height="360">
-							<source src="images\robot_manipulation\demo2.MOV" type="video/quicktime">
-							<source src="images\robot_manipulation\demo2.MOV" type="video/mp4">
-						</video>
+						<h3>Result</h3>
+						<dd>
+							<p>The models predicted the features closely, but high residuals did not consistently line up with tracking failures, so no reliable early-warning signal was found. Next steps would be addressing non-stationarity and trying classification models on a larger set of failure cases.</p>
+						</dd>
 					</dl>
 
 					<hr class="major" />
 					<h2>Related Skills and Tools</h2>
 					<ul>
-						<li>Robot Operating System (ROS)</li>
-						<li>Computer Vision</li>
-						<li>OpenCV</li>
-						<li>Robot Manipulation</li>
-						<li>Universal Robots UR 3</li>
+						<li>ORB-SLAM3, OpenVSLAM, LSD-SLAM</li>
+						<li>Trajectory evaluation (APE / RPE)</li>
+						<li>Time-series analysis (VAR, AutoReg, Granger causality)</li>
+						<li>Python</li>
 					</ul>
+
+					<hr class="major" />
+					<h2>Code and Report</h2>
+					<p><a href="https://github.com/NarathipR/GE_Benchmarking-different-SLAM-approaches">GitHub repository</a></p>
 
 					<hr class="major" />
 					<h2>Contributors</h2>
 					<ul>
 						<li>Narathip Rodwarna</li>
-						<li>Vagish Sivaramakrishnan</li>
+						<li>Sridharan Subramanian</li>
+						<li>Yifei Li</li>
 					</ul>
 				</section>
 			</div>
@@ -190,16 +143,14 @@
 						<li class="icon solid fa-envelope"><a href="mailto:nrodwarna@gmail.com">nrodwarna@gmail.com</a>
 						</li>
 						<li class="icon solid fa-phone">(+1) 917-756-4639</li>
-						<li class="icon solid fa-home">Champaign, IL 61820</li>
+						<li class="icon solid fa-home">Nevada, USA</li>
 
 					</ul>
 				</section>
 
 				<!-- Footer -->
 				<footer id="footer">
-					<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a
-							href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5
-							UP</a>.</p>
+					<p class="copyright">&copy; 2026 Narathip Rodwarna. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 				</footer>
 
 			</div>
